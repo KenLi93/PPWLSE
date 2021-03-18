@@ -3,7 +3,9 @@
 #' Obtain the trajectory of LSA-LASSO via path algorithm
 #'
 #' @import genlasso
+#'
 #' @export
+#'
 lasso_path <- function(X, Y, lambda = NULL) {
   # dimension of the parameter
   dd <- ncol(X)
