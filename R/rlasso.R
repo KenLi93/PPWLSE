@@ -24,7 +24,7 @@ lasso_path <- function(X, Y, lambda = NULL) {
   gamma_tilde <- LL %*% beta_tilde
 
   # defining the objective function
-  sol_results <- genlasso(y = gamma_tilde, D = solve(LL), approx = TRUE, svd = TRUE, rtol = 1e-15, eps = 1e-15)
+  sol_results <- genlasso::genlasso(y = gamma_tilde, D = solve(LL), approx = TRUE, svd = TRUE, rtol = 1e-15, eps = 1e-15)
 
   ## summarize the solution path at the knots
   sol_path <- vector("list", 3)
@@ -99,7 +99,7 @@ rlasso_path <- function(X, Y, lambda = NULL) {
 
 
   # defining the objective function
-  sol_results <- genlasso(y = gamma_tilde, D = solve(LL), approx = TRUE, svd = TRUE, rtol = 1e-15, eps = 1e-15)
+  sol_results <- genlasso::genlasso(y = gamma_tilde, D = solve(LL), approx = TRUE, svd = TRUE, rtol = 1e-15, eps = 1e-15)
 
   ## summarize the solution path at the knots
   sol_path <- vector("list", 3)
