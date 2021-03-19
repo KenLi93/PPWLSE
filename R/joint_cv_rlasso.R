@@ -47,8 +47,8 @@ cv_joint_shrinkage_est <- function(X, Y, lambda = NULL, nlambda = 100, nfolds = 
 
       for (kk in 1:nlambda) {
         ridge_cv_err_mat[kk, jj] <- mean((testing_Y - testing_X %*% fold_ridge_RES$beta[[kk]]) ^ 2)
-        rridge_cv_err_mat[kk, jj] <- mean((testing_Y - testing_X %*% fold_rJS_RES$beta[[kk]]) ^ 2)
-        rJS_cv_err_mat[kk, jj] <- mean((testing_Y - testing_X %*% fold_lasso_RES$beta[[kk]]) ^ 2)
+        rridge_cv_err_mat[kk, jj] <- mean((testing_Y - testing_X %*% fold_rridge_RES$beta[[kk]]) ^ 2)
+        rJS_cv_err_mat[kk, jj] <- mean((testing_Y - testing_X %*% fold_rJS_RES$beta[[kk]]) ^ 2)
         lasso_cv_err_mat[kk, jj] <- mean((testing_Y - testing_X %*% fold_lasso_RES$beta[[kk]]) ^ 2)
         rlasso_cv_err_mat[kk, jj] <- mean((testing_Y - testing_X %*% fold_rlasso_RES$beta[[kk]]) ^ 2)
 
