@@ -33,9 +33,6 @@ cv_joint_shrinkage_est <- function(X, Y, lambda = NULL, nlambda = 100, nfolds = 
       testing_X <- X[testing_id,]
       testing_Y <- Y[testing_id]
 
-      testing_Y <- testing_Y - mean(training_Y)
-      training_Y <- training_Y - mean(training_Y)
-
 
 
       ## compute the rLASSO estimate using the training data
@@ -74,14 +71,11 @@ cv_joint_shrinkage_est <- function(X, Y, lambda = NULL, nlambda = 100, nfolds = 
   rlasso_opt_lambda <- rlasso_lambda[which.min(rlasso_cv_err)]
 
 
-
-  Y_standardized <- Y - mean(Y)
-
-  ridge_opt_beta <- ridge(X = X, Y = Y_standardized, lambda = ridge_opt_lambda)$beta[[1]]
-  rridge_opt_beta <- rridge(X = X, Y = Y_standardized, lambda = rridge_opt_lambda)$beta[[1]]
-  rJS_opt_beta <- rJS(X = X, Y = Y_standardized, lambda = rJS_opt_lambda)$beta[[1]]
-  lasso_opt_beta <- lasso(X = X, Y = Y_standardized, lambda = lasso_opt_lambda)$beta[[1]]
-  rlasso_opt_beta <- rlasso(X = X, Y = Y_standardized, lambda = rlasso_opt_lambda)$beta[[1]]
+  ridge_opt_beta <- ridge(X = X, Y = Y, lambda = ridge_opt_lambda)$beta[[1]]
+  rridge_opt_beta <- rridge(X = X, Y = Y, lambda = rridge_opt_lambda)$beta[[1]]
+  rJS_opt_beta <- rJS(X = X, Y = Y, lambda = rJS_opt_lambda)$beta[[1]]
+  lasso_opt_beta <- lasso(X = X, Y = Y, lambda = lasso_opt_lambda)$beta[[1]]
+  rlasso_opt_beta <- rlasso(X = X, Y = Y, lambda = rlasso_opt_lambda)$beta[[1]]
 
   RES <- list(
     ridge = list(lambda = ridge_lambda, cv_err = ridge_cv_err, opt_lambda = ridge_opt_lambda, opt_beta = ridge_opt_beta),
