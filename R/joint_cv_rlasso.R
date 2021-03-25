@@ -12,7 +12,7 @@ cv_joint_shrinkage_est <- function(X, Y, lambda = NULL, nlambda = 100, nfolds = 
     lasso_lambda <- rlasso_lambda <-
      seq(0, max(rlasso_path(X = X, Y = Y)$lambda[1], lasso_path(X = X, Y = Y)$lambda[1]), length.out = nlambda)
   } else {
-    lasso_lambda <- rlasso_lambda <- lambda
+    rridge_lambda <- ridge_lambda <- rJS_lambda <- lasso_lambda <- rlasso_lambda <- lambda
   }
 
   rridge_cv_err_mat_full <- ridge_cv_err_mat_full <- rJS_cv_err_mat_full <-
