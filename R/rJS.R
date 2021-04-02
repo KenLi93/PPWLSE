@@ -30,6 +30,37 @@ rJS <- function(X, Y, lambda = NULL, nlambda = 100) {
 }
 
 
+#' Scaled OLS estimator
+#' @export
+scaledLS <- function(X, Y, lambda = NULL, nlambda = 100) {
+  ## obtain the solution path of rLASSO
+  pp <- ncol(X) ## number of the covariates
+  nn <- nrow(X) ## number of observations
+
+
+  if (nn <= pp) stop("rRidge can only solve problems with n > p!")
+
+  ## compute the OLS estimator and sandwich variance
+  beta_tilde <- as.numeric(solve(t(X) %*% X) %*% t(X) %*% Y)
+
+
+  if (is.null(lambda)) {
+    lambda <- seq(0, sqrt(nn), length.out = nlambda)
+  }
+
+  nlam <- length(lambda)
+  RES <- list(lambda = lambda,
+              beta = vector(mode = "list", length = nlam)) ## make the list
+
+  for (ii in 1:nlam) {
+    lam <- lambda[ii]
+
+    RES$beta[[ii]] <- beta_tilde / (1 + lam)
+  }
+  return(RES)
+}
+
+
 #' James-Stein estimator for linear regression
 #'
 #' @export
